@@ -33,3 +33,35 @@ for (i = 0; i < pacientes.length; i++) {
         tdImc.textContent = imc.toFixed(2)
     }
 }
+
+const botao = document.querySelector('[data-form-button]')
+
+botao.addEventListener("click", (evento)=> {
+    evento.preventDefault()
+    const form = document.querySelector('[data-form]')
+
+    const nome = form.nome.value
+    const peso = form.peso.value
+    const altura = form.altura.value
+    const gordura = form.gordura.value
+
+    const formTr = document.createElement ('tr')
+
+    const nomeTd = document.createElement ('td')
+    const pesoTd = document.createElement ('td')
+    const alturaTd = document.createElement ('td')
+    const gorduraTd = document.createElement ('td')
+
+    nomeTd.textContent = nome
+    pesoTd.textContent = peso
+    alturaTd.textContent = altura
+    gorduraTd.textContent = gordura
+
+    formTr.appendChild(nomeTd)
+    formTr.appendChild(pesoTd)
+    formTr.appendChild(alturaTd)
+    formTr.appendChild(gorduraTd)
+
+    const tabela = document.querySelector('[data-tabela]')
+    tabela.appendChild(formTr)
+})
