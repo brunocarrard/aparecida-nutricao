@@ -2,14 +2,33 @@ const botao = document.querySelector('[data-form-button]')
 
 botao.addEventListener("click", (evento)=> {
     evento.preventDefault()
+    const erroUl = document.querySelector('[data-erro]')
+    erroUl.innerHTML = ""
+
     const form = document.querySelector('[data-form]')
 
     const paciente = dadosPaciente(form)    
 
     const formTr = criaTr(paciente)
 
+    const erros = validaPaciente(paciente)
+
+    if (erros.length > 0){
+        console.log(erros)
+        erros.forEach(erro => {
+            const erroUl = document.querySelector('[data-erro]')
+            const erroLi = document.createElement('li')
+            erroLi.textContent = erro
+            erroLi.classList.add("mensagem-erro")
+            erroUl.appendChild(erroLi)
+        })
+        return
+    }
+
+
     const tabela = document.querySelector('[data-tabela]')
     tabela.appendChild(formTr)
+    form.reset()
 })
 
 function dadosPaciente(form) {
@@ -48,4 +67,22 @@ function criaTd(dado, classe) {
     td.classList.add(classe)
 
     return td
+}
+
+function validaPaciente(paciente) {
+    var erros = []
+    if(!validaPeso(paciente.peso)){
+        erros.push("Peso é inválido")
+    }
+    if(!validaAltura(paciente.altura)){
+        erros.push("Altura é inválida")
+    }
+    if(!validaNome(paciente.nome)){
+        erros.push("Nome não pode ficar em branco")
+    }
+    if(!validaGordura(paciente.gordura)){
+        erros.push("% de gordura inválida")
+    }
+
+    return erros
 }
