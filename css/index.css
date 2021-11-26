@@ -145,3 +145,8 @@ button[disabled=disabled], button:disabled {
 .lista-erro {
 	padding: 0 0 1rem 0
 }
+
+.fadeout {
+	opacity: 0;
+	transition-duration: 0.5s;
+}
