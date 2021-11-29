@@ -2,15 +2,6 @@ var formFiltro = document.querySelector("[data-filtro]")
     formFiltro.addEventListener("input", function(){
         var pacientes = document.querySelectorAll("[data-paciente]")
         
-        /*for (var i=0; i<pacientes.length; i++) {
-            const paciente = pacientes[i]
-            var tdNome = paciente.querySelector("[data-nome]")
-            var nome = tdNome.textContent
-            if (nome != this.value) {
-                paciente.classList.add("invisivel")
-            }else{
-                paciente.classList.remove("invisivel")
-        }*/
         if(this.value.length > 0){
             pacientes.forEach(paciente => {
                 var tdNome = paciente.querySelector("[data-nome]")

@@ -9,9 +9,9 @@ botao.addEventListener("click", (evento)=> {
 
     const paciente = dadosPaciente(form)    
 
-    const formTr = criaTr(paciente)
-
     const erros = validaPaciente(paciente)
+
+    adicionaPaciente(paciente)
 
     if (erros.length > 0){
         console.log(erros)
@@ -25,11 +25,13 @@ botao.addEventListener("click", (evento)=> {
         return
     }
 
-
-    const tabela = document.querySelector('[data-tabela]')
-    tabela.appendChild(formTr)
     form.reset()
 })
+function adicionaPaciente(paciente) {
+    const formTr = criaTr(paciente)
+    const tabela = document.querySelector('[data-tabela]')
+    tabela.appendChild(formTr)
+}
 
 function dadosPaciente(form) {
     const paciente = {
@@ -45,12 +47,13 @@ function dadosPaciente(form) {
 function criaTr(paciente) {
     const formTr = document.createElement ('tr')
     formTr.classList.add("paciente")
+    formTr.setAttribute("data-paciente", "")
 
-    const nomeTd = criaTd(paciente.nome, "info-nome")
-    const pesoTd = criaTd(paciente.peso, "info-peso")
-    const alturaTd = criaTd(paciente.altura, "info-altura")
-    const gorduraTd = criaTd(paciente.gordura, "info.gordura")
-    const imcTd = criaTd(paciente.imc, "info-imc")
+    const nomeTd = criaTd(paciente.nome, "info-nome", "data-nome", "")
+    const pesoTd = criaTd(paciente.peso, "info-peso", "data-peso", "")
+    const alturaTd = criaTd(paciente.altura, "info-altura", "data-altura", "")
+    const gorduraTd = criaTd(paciente.gordura, "info-gordura", "data-gordura", "")
+    const imcTd = criaTd(paciente.imc, "info-imc", "data-imc", "")
 
     formTr.appendChild(nomeTd)
     formTr.appendChild(pesoTd)
@@ -61,10 +64,12 @@ function criaTr(paciente) {
     return formTr
 }
 
-function criaTd(dado, classe) {
+
+function criaTd(dado, classe, atributo, valor) {
     var td = document.createElement ('td')
     td.textContent = dado
     td.classList.add(classe)
+    td.setAttribute(atributo, valor)
 
     return td
 }
